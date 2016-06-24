@@ -3,6 +3,8 @@ package saigatram.myfirstapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,7 +26,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.content);
         layout.addView(textView);
     }
-
+    /** Called when the user clicks the previous page button */
+    public void goBack(View view) {
+        Intent intent = new Intent(this,MyActivity.class);
+        startActivity(intent);
+    }
 
 
 
