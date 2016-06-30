@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
 
 
@@ -120,6 +121,18 @@ public class MyActivity extends AppCompatActivity
         super.onStop();
     }
 
+    /*
+    *This is needed for the on pause so location isnt checked like crazy
+    *
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+    protected void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (LocationListener) this);
+    }
+        */
+
     @Override
     public void onConnected(Bundle connectionHint) {
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
@@ -128,8 +141,8 @@ public class MyActivity extends AppCompatActivity
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
-            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+            mLatitudeText.append(String.valueOf(mLastLocation.getLatitude()));
+            mLongitudeText.append(String.valueOf(mLastLocation.getLongitude()));
         }
     }
 
