@@ -68,16 +68,17 @@ public class MyActivity extends AppCompatActivity
 
                 ActivityCompat.requestPermissions(MyActivity.this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                MY_PERMISSIONS_REQUEST_GET_LOCATION);
+                        MY_PERMISSIONS_REQUEST_GET_LOCATION);
 
                 // app-defined int constant. The callback method gets the
                 // result of the request.
             }
         }
-
         mLatitudeText=(TextView)findViewById(R.id.textView1);
         mLongitudeText=(TextView)findViewById(R.id.textView2);
     }
+
+
 
 
     @Override
@@ -102,7 +103,6 @@ public class MyActivity extends AppCompatActivity
 
         }
     }
-
     public void sendMessage(View view) {
         Intent intent = new Intent(this,DisplayMessageActivity.class);
         EditText editText = (EditText) findViewById(R.id.edit_message);
@@ -121,6 +121,18 @@ public class MyActivity extends AppCompatActivity
         super.onStop();
     }
 
+    public void location(View view) {
+        int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
+                Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+            mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+        }
+    }
+
     /*
     *This is needed for the on pause so location isnt checked like crazy
     *
@@ -135,15 +147,7 @@ public class MyActivity extends AppCompatActivity
 
     @Override
     public void onConnected(Bundle connectionHint) {
-        int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
 
-        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            mLatitudeText.append(String.valueOf(mLastLocation.getLatitude()));
-            mLongitudeText.append(String.valueOf(mLastLocation.getLongitude()));
-        }
     }
 
     @Override
