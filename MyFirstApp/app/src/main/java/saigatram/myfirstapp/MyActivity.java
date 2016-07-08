@@ -39,7 +39,7 @@ public class MyActivity extends AppCompatActivity
 
         /*check if permssion is gotten
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
+                Manifest.permission.ACCESS_FINE_LOCATION);
         */
 
         // Create an instance of GoogleAPIClient.
@@ -52,7 +52,7 @@ public class MyActivity extends AppCompatActivity
         }
 
         if (ContextCompat.checkSelfPermission(MyActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
             // Should we show an explanation?
@@ -67,7 +67,7 @@ public class MyActivity extends AppCompatActivity
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(MyActivity.this,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         MY_PERMISSIONS_REQUEST_GET_LOCATION);
 
                 // app-defined int constant. The callback method gets the
@@ -123,7 +123,7 @@ public class MyActivity extends AppCompatActivity
 
     public void location(View view) {
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
-                Manifest.permission.ACCESS_COARSE_LOCATION);
+                Manifest.permission.ACCESS_FINE_LOCATION);
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
