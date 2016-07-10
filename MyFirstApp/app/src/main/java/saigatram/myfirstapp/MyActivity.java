@@ -21,7 +21,7 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.location.LocationRequest;
-
+import com.google.android.gms.location.places.Places;
 
 
 public class MyActivity extends AppCompatActivity
@@ -31,6 +31,7 @@ public class MyActivity extends AppCompatActivity
     public final static String EXTRA_MESSAGE = "saigatram.myfirstapp.MESSAGE";
     private static final int MY_PERMISSIONS_REQUEST_GET_LOCATION = 1;
     private GoogleApiClient mGoogleApiClient;
+    private GoogleApiClient mGoogleApiClient1;
     Location mLastLocation;
     TextView mLatitudeText,mLongitudeText;
 
@@ -81,6 +82,12 @@ public class MyActivity extends AppCompatActivity
         mLongitudeText=(TextView)findViewById(R.id.textView2);
 
 
+        mGoogleApiClient1 = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
     }
 
     @Override
