@@ -13,16 +13,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import android.support.v4.app.FragmentActivity;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.location.LocationRequest;
+
 
 
 public class MyActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener
+                    GoogleApiClient.OnConnectionFailedListener
 {
     public final static String EXTRA_MESSAGE = "saigatram.myfirstapp.MESSAGE";
     private static final int MY_PERMISSIONS_REQUEST_GET_LOCATION = 1;
@@ -41,7 +45,6 @@ public class MyActivity extends AppCompatActivity
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         */
-
         // Create an instance of GoogleAPIClient.
         if (mGoogleApiClient == null) {
             mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -76,10 +79,9 @@ public class MyActivity extends AppCompatActivity
         }
         mLatitudeText=(TextView)findViewById(R.id.textView1);
         mLongitudeText=(TextView)findViewById(R.id.textView2);
+
+
     }
-
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
