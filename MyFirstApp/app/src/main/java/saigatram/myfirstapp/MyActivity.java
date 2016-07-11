@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationServices;
@@ -22,6 +24,7 @@ import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 
 public class MyActivity extends AppCompatActivity
@@ -88,7 +91,10 @@ public class MyActivity extends AppCompatActivity
                 .addApi(Places.PLACE_DETECTION_API)
                 .enableAutoManage(this, this)
                 .build();
+
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,
@@ -130,7 +136,7 @@ public class MyActivity extends AppCompatActivity
         super.onStop();
     }
 
-    public void location(View view) {
+    public void location(View view) throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
@@ -140,7 +146,14 @@ public class MyActivity extends AppCompatActivity
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
         }
+
+        int PLACE_PICKER_REQUEST = 1;
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
     }
+
+
 
     /*
     *This is needed for the on pause so location isnt checked like crazy
