@@ -23,6 +23,7 @@ import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListe
 import android.support.v4.app.FragmentActivity;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
@@ -135,7 +136,7 @@ public class MyActivity extends AppCompatActivity
         mGoogleApiClient.disconnect();
         super.onStop();
     }
-
+    int PLACE_PICKER_REQUEST = 1;
     public void location(View view) throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
@@ -147,10 +148,20 @@ public class MyActivity extends AppCompatActivity
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
         }
 
-        int PLACE_PICKER_REQUEST = 1;
+
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                String toastMsg = String.format("Place: %s", place.getName());
+                Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 
