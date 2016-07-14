@@ -132,6 +132,8 @@ public class MyActivity extends AppCompatActivity
         super.onStop();
     }
     int PLACE_PICKER_REQUEST = 1;
+
+    //When the button is clicked this is called
     public void location(View view) throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
@@ -145,8 +147,8 @@ public class MyActivity extends AppCompatActivity
 
 
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
-
         startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
+
 
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
