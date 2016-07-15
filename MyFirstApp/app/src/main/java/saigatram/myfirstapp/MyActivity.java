@@ -1,6 +1,7 @@
 package saigatram.myfirstapp;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -9,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,10 +19,13 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 
 public class MyActivity extends AppCompatActivity
@@ -33,6 +38,7 @@ public class MyActivity extends AppCompatActivity
     private GoogleApiClient mGoogleApiClient1;
     Location mLastLocation;
     TextView mLatitudeText,mLongitudeText;
+    public static final String TAG = MyActivity.class.getSimpleName();
 
 
     //The following code checks if the app has permission to read the user's contacts, and requests the permission if necessary
@@ -150,6 +156,26 @@ public class MyActivity extends AppCompatActivity
         startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
 
 
+        //AUTOCOMPLETE CODE
+
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i(TAG, "Place: " + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i(TAG, "An error occurred: " + status);
+            }
+        });
+
+
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
@@ -174,6 +200,7 @@ public class MyActivity extends AppCompatActivity
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (LocationListener) this);
     }
         */
+
 
     @Override
     public void onConnected(Bundle connectionHint) {
