@@ -95,9 +95,6 @@ public class MyActivity extends AppCompatActivity
                 .build();
 
     }
-
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -175,7 +172,6 @@ public class MyActivity extends AppCompatActivity
             }
         });
 
-
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
@@ -186,9 +182,6 @@ public class MyActivity extends AppCompatActivity
             }
         }
     }
-
-
-
     /*
     *This is needed for the on pause so location isnt checked like crazy
     *
@@ -200,8 +193,6 @@ public class MyActivity extends AppCompatActivity
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, (LocationListener) this);
     }
         */
-
-
     @Override
     public void onConnected(Bundle connectionHint) {
 
@@ -217,4 +208,3 @@ public class MyActivity extends AppCompatActivity
 
     }
 }
-
