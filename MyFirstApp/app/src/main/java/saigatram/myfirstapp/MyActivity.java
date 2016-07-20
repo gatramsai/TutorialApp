@@ -114,7 +114,6 @@ public class MyActivity extends AppCompatActivity
                 }
                 return;
             }
-
         }
     }
     public void sendMessage(View view) {
@@ -129,7 +128,6 @@ public class MyActivity extends AppCompatActivity
         mGoogleApiClient.connect();
         super.onStart();
     }
-
     protected void onStop() {
         mGoogleApiClient.disconnect();
         super.onStop();
@@ -147,7 +145,6 @@ public class MyActivity extends AppCompatActivity
             mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
         }
-
 
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
         startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
@@ -171,7 +168,6 @@ public class MyActivity extends AppCompatActivity
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
-
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
