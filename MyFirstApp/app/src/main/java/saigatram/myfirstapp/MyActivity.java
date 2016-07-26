@@ -27,6 +27,8 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
+import se.walkercrou.places.GooglePlaces;
+
 
 public class MyActivity extends AppCompatActivity
         implements GoogleApiClient.ConnectionCallbacks,
@@ -95,6 +97,7 @@ public class MyActivity extends AppCompatActivity
                 .build();
 
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -134,10 +137,15 @@ public class MyActivity extends AppCompatActivity
     }
     int PLACE_PICKER_REQUEST = 1;
 
+
     //When the button is clicked this is called
     public void location(View view) throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
+
+        GooglePlaces client = new GooglePlaces("AIzaSyC3GklQ1R1OrbBIXoLXVmJLIyYn83bz-Ho");
+        //creating the client
+
 
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
@@ -178,6 +186,8 @@ public class MyActivity extends AppCompatActivity
             }
         }
     }
+
+
     /*
     *This is needed for the on pause so location isnt checked like crazy
     *
