@@ -1,7 +1,6 @@
 package saigatram.myfirstapp;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -24,8 +23,11 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import android.support.v4.app.Fragment;
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+
+import java.util.List;
 
 import se.walkercrou.places.GooglePlaces;
 
@@ -143,10 +145,6 @@ public class MyActivity extends AppCompatActivity
         int permissionCheck = ContextCompat.checkSelfPermission(MyActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
 
-        GooglePlaces client = new GooglePlaces("AIzaSyC3GklQ1R1OrbBIXoLXVmJLIyYn83bz-Ho");
-        //creating the client
-
-
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
@@ -187,6 +185,16 @@ public class MyActivity extends AppCompatActivity
         }
     }
 
+
+    public void getPlaces (){
+        //creating the client
+        GooglePlaces client = new GooglePlaces("AIzaSyC3GklQ1R1OrbBIXoLXVmJLIyYn83bz-Ho");
+
+        double lat=mLastLocation.getLatitude();
+        double lng=mLastLocation.getLongitude();
+        double radius=4000;
+        List<Place> places = client.getNearbyPlaces(lat, lng, radius, GooglePlaces.MAXIMUM_RESULTS);
+    }
 
     /*
     *This is needed for the on pause so location isnt checked like crazy
