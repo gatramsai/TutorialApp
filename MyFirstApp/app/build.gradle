@@ -4,6 +4,10 @@ android {
     compileSdkVersion 24
     buildToolsVersion "23.0.3"
 
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
     defaultConfig {
         applicationId "saigatram.myfirstapp"
         minSdkVersion 15
@@ -20,16 +24,20 @@ android {
 }
 
     repositories {
-        mavenCentral()
+        //mavenCentral() THIS IS FOR THE FIRST IMPLEMEATION
+        maven { url 'https://mvnrepository.com/artifact/net.sf.sprockets/sprockets' }
     }
 apply plugin: 'com.android.application'
 
 dependencies {
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:24.+'
     compile 'com.google.android.gms:play-services-places:9.2.1'
     compile 'com.google.android.gms:play-services-location:9.2.1'
-    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
-    compile 'se.walkercrou:google-places-api-java:2.1.2'
+    //compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
+    //compile 'se.walkercrou:google-places-api-java:2.1.2'
+    compile 'net.sf.sprockets:sprockets:3.1.0'
     compile 'junit:junit:4.12'
 }
+

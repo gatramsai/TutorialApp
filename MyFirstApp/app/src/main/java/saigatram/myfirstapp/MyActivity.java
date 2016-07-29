@@ -29,7 +29,7 @@ import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import java.util.List;
 
-import se.walkercrou.places.GooglePlaces;
+//import se.walkercrou.places.GooglePlaces;
 
 
 public class MyActivity extends AppCompatActivity
@@ -187,6 +187,9 @@ public class MyActivity extends AppCompatActivity
 
 
     public void getPlaces (){
+
+
+        /*************** THIS IS GITHUB CODE IMPLEMENTATION
         //creating the client
         GooglePlaces client = new GooglePlaces("AIzaSyC3GklQ1R1OrbBIXoLXVmJLIyYn83bz-Ho");
 
@@ -194,7 +197,10 @@ public class MyActivity extends AppCompatActivity
         double lng=mLastLocation.getLongitude();
         double radius=4000;
         List<Place> places = client.getNearbyPlaces(lat, lng, radius, GooglePlaces.MAXIMUM_RESULTS);
+
+         *******************************/
     }
+
 
     /*
     *This is needed for the on pause so location isnt checked like crazy
